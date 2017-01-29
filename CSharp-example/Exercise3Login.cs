@@ -4,10 +4,13 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 
-namespace csharp_example
+namespace CSharp_example
 {
+    /// <summary>
+    /// Exercise3: "Login" scenario for Selenium3 course
+    /// </summary>
     [TestFixture]
-    public class FFTest
+    public class Exercise3Login
     {
         private IWebDriver driver;
         private WebDriverWait wait;
@@ -20,13 +23,13 @@ namespace csharp_example
         }
 
         [Test]
-        public void FFFirstTest()
+        public void Exercise3LoginTest()
         {
-            var url = "http://www.google.by/";
-            driver.Url = url;
-            driver.FindElement(By.Name("q")).SendKeys("webdriver");
-            driver.FindElement(By.Name("btnG")).Click();
-            wait.Until(ExpectedConditions.TitleIs("webdriver - Поиск в Google"));
+            driver.Url = "http://localhost/litecart/admin/";
+            driver.FindElement(By.Name("username")).SendKeys("admin");
+            driver.FindElement(By.Name("password")).SendKeys("admin");
+            driver.FindElement(By.Name("login")).Click();
+            wait.Until(ExpectedConditions.TitleIs("My Store"));
         }
 
         [TearDown]
