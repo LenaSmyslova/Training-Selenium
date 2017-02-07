@@ -70,6 +70,7 @@
     <Compile Include="Firefox.cs" />
     <Compile Include="IE.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Exercise7Menu.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
