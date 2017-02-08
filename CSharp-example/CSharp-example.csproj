@@ -71,6 +71,7 @@
     <Compile Include="IE.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Exercise7Menu.cs" />
+    <Compile Include="Exercise8Stickers.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
