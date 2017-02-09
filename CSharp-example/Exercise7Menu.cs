@@ -34,23 +34,25 @@ namespace CSharp_example
             wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(By.CssSelector("img[title='My Store']")));
 
             //Counting all parent menu items
-            IList<IWebElement> parentCounts = driver.FindElements(By.CssSelector("li#app-"));
-            foreach (IWebElement parentCount in parentCounts)
+             int parentCounts = driver.FindElements(By.CssSelector("li#app-")).Count;
+            for (int i = 1; i <= parentCounts; i++)
             {
-                driver.FindElement(By.CssSelector("li#app-")).Click();
+                var cssSelectorToFindParent = "li#app-:nth-of-type("+ i +")";
+                driver.FindElement(By.CssSelector(cssSelectorToFindParent)).Click();
                 Assert.AreEqual(true, driver.FindElement(By.CssSelector("div#body td#content h1")).Displayed);
 
                 //Counting all child menu items
-                IList<IWebElement> childCounts = driver.FindElements(By.CssSelector("ul.docs li"));
-                if (childCounts.Count > 0)
+                int childCounts = driver.FindElements(By.CssSelector("ul.docs li")).Count;
+                if (childCounts > 0)
                 {
-                    foreach (IWebElement childCount in childCounts)
+                    for (int j = 1; j <= childCounts; j++)
                     {
-                        driver.FindElement(By.CssSelector("ul.docs li")).Click();
+                        var cssSelectorToFindChild = "ul.docs li:nth-of-type(" + j + ")";
+                        driver.FindElement(By.CssSelector(cssSelectorToFindChild)).Click();
                         Assert.AreEqual(true, driver.FindElement(By.CssSelector("div#body td#content h1")).Displayed);
                     }
                 }         
-             }
+                }
         }
 
         [TearDown]
