@@ -72,6 +72,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Exercise7Menu.cs" />
     <Compile Include="Exercise8Stickers.cs" />
+    <Compile Include="Exercise9Sorting1.cs" />
+    <Compile Include="Exercise9Sorting2.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
