@@ -27,17 +27,18 @@ namespace CSharp_example
         //Check initial sorting
         public void sortingCheck(IList<IWebElement> item)
         {
-            IList<String> itemActual = new List<String>();
+            List<String> itemActual = new List<String>();
 
             //Get text for all listed items
             for (int i = 0; i < item.Count; i++)
             {
-                itemActual.Add(item[i].GetAttribute("textContent"));
+                SelectElement selectedValue = new SelectElement(item[i]);
+                itemActual.Add(selectedValue.SelectedOption.Text);
             }
 
             //Sort all listed items
-            IList<String> itemSorted = new List<String>();
-            itemSorted = itemActual;
+            List<String> itemSorted = new List<String>();
+            itemSorted.AddRange(itemActual);
             itemSorted.OrderBy(a => a);
 
             //Check initial sorting
@@ -55,16 +56,16 @@ namespace CSharp_example
             wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(By.CssSelector("img[title='My Store']")));
 
             //Get all listed countries
-            IList<IWebElement> countries = driver.FindElements(By.CssSelector("tr.row td:nth-of-type(3)"));
+            IList<IWebElement> countries = driver.FindElements(By.CssSelector("table.dataTable tr.row td:nth-of-type(3)"));
 
             //Check sorting for all zones
-            for (int i = 2; i <= countries.Count; i++)
+            for (int i = 2; i <= (countries.Count + 1); i++)
             {
                 var cssSelectorToClickCounrty = "tr.row:nth-of-type(" + i + ") td:nth-of-type(3) a";
                 driver.FindElement(By.CssSelector(cssSelectorToClickCounrty)).Click();
                 wait.Until(ExpectedConditions.TitleIs("Edit Geo Zone | My Store"));
-                IList<IWebElement> zones = driver.FindElements(By.CssSelector(""));
-
+                IList<IWebElement> zones = driver.FindElements(By.CssSelector("table#table-zones td:nth-of-type(3) select"));
+                sortingCheck(zones);
                 driver.Url = "http://localhost/litecart/admin/?app=geo_zones&doc=geo_zones";
             }
         }
