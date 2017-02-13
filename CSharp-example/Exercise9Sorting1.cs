@@ -36,8 +36,8 @@ namespace CSharp_example
             }
 
             //Sort all listed items
-            IList<String> itemSorted = new List<String>();
-            itemSorted = itemActual;
+            List<String> itemSorted = new List<String>();
+            itemSorted.AddRange(itemActual);
             itemSorted.OrderBy(a => a);
 
             //Check initial sorting
