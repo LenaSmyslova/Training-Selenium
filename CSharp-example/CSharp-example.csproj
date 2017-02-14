@@ -74,6 +74,7 @@
     <Compile Include="Exercise8Stickers.cs" />
     <Compile Include="Exercise9Sorting1.cs" />
     <Compile Include="Exercise9Sorting2.cs" />
+    <Compile Include="Exercise10Product.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
