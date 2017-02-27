@@ -43,6 +43,7 @@ namespace CSharp_example
             registrationForm.FindElement(By.Name("city")).SendKeys("Test City");
             SelectElement selectorCountry = new SelectElement(registrationForm.FindElement(By.Name("country_code")));
             selectorCountry.SelectByValue("US");
+            wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(By.CssSelector("select[name=zone_code]")));
             SelectElement selectorState = new SelectElement(registrationForm.FindElement(By.CssSelector("select[name=zone_code]")));
             selectorState.SelectByValue("CA");
             registrationForm.FindElement(By.Name("email")).SendKeys(emailAddress);
