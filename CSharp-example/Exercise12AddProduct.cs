@@ -4,6 +4,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using System.Collections.Generic;
+using System.IO;
 
 namespace CSharp_example
 {
@@ -61,7 +62,8 @@ namespace CSharp_example
             general.FindElement(By.CssSelector("div.input-wrapper input[value='1-3']")).Click();
             general.FindElement(By.Name("quantity")).Clear();
             general.FindElement(By.Name("quantity")).SendKeys("15");
-            general.FindElement(By.Name("new_images[]")).SendKeys("duck.jpg");
+            var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "duck.jpg");
+            general.FindElement(By.Name("new_images[]")).SendKeys(filePath);
             general.FindElement(By.Name("date_valid_from")).SendKeys(Keys.Home + "2017-02-15");
             general.FindElement(By.Name("date_valid_to")).SendKeys(Keys.Home + "2018-02-15");
             driver.FindElement(By.CssSelector("div.tabs li a[href='#tab-information']")).Click();
