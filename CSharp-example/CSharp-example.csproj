@@ -76,9 +76,13 @@
     <Compile Include="Exercise9Sorting2.cs" />
     <Compile Include="Exercise10Product.cs" />
     <Compile Include="Exercise11Registration.cs" />
+    <Compile Include="Exercise12AddProduct.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="duck.jpg" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
