@@ -53,14 +53,16 @@ namespace CSharp_example
             driver.FindElement(By.CssSelector("div#cart a.link")).Click();
 
             //Delete products from basket
-            int productCount = driver.FindElements(By.CssSelector("li.item")).Count;
-            for(int j = (productCount-1); j > 0; j--)
+            int productCount = 0;
+            do
             {
-                IList <IWebElement> basketProducts = driver.FindElements(By.CssSelector("li.item"));
+                productCount = driver.FindElements(By.CssSelector("li.item")).Count;
+                IList<IWebElement> basketProducts = driver.FindElements(By.CssSelector("li.item"));
                 basketProducts[0].FindElement(By.Name("remove_cart_item")).Click();
                 IList<IWebElement> orderSummary = driver.FindElements(By.CssSelector("table.dataTable td.item"));
                 wait.Until(ExpectedConditions.StalenessOf(orderSummary[0]));
-            }  
+            } while (productCount > 1);
+            wait.Until(ExpectedConditions.TextToBePresentInElement(driver.FindElement(By.CssSelector("em")), "There are no items in your cart."));
         }
 
         [TearDown]
