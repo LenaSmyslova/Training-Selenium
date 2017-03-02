@@ -1,8 +1,10 @@
 ﻿using System;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CSharp_example
 {
@@ -18,7 +20,7 @@ namespace CSharp_example
         [SetUp]
         public void start()
         {
-            driver = new FirefoxDriver();
+            driver = new ChromeDriver();
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
         }
 
@@ -34,7 +36,29 @@ namespace CSharp_example
 
             //Navigate to Add Country page
             driver.FindElement(By.CssSelector("a.button")).Click();
+
+            IList <IWebElement> links = driver.FindElements(By.CssSelector("i.fa-external-link"));
+            string originalWindow = driver.CurrentWindowHandle;
+            string newWindow = string.Empty;
+            IList <string> oldWindows = driver.WindowHandles;
+            int numberOfWindows = oldWindows.Count;
+
+            foreach (IWebElement link in links)
+            {
+                link.Click();
+                wait.Until(driver => driver.WindowHandles.Count() == (numberOfWindows + 1));
+                IList<string> currentWindows = driver.WindowHandles;
+                IList<string> differentWindows = currentWindows.Except(oldWindows).ToList();
+                if (differentWindows.Count > 0)
+                {
+                    newWindow = differentWindows[0];
+                }
+                driver.SwitchTo().Window(newWindow);
+                driver.Close();
+                driver.SwitchTo().Window(originalWindow);
+            }
         }
+
 
         [TearDown]
         public void stop()
